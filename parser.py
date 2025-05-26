@@ -9,8 +9,12 @@ def get_wb_info(article: str) -> Optional[dict]:
     if response.status_code != 200:
         return None
     else:
-        data = response.json()['data']['products'][0]
-        return {data['name']: data['priceU'] // 100}
+        data = response.json()['data']['products']
+        if data:
+            return {data[0]['name']: data[0]['priceU'] // 100}
+        else:
+            return None
+
 
 
 if __name__ == "__main__":
